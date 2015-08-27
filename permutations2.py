@@ -1,7 +1,24 @@
-__author__ = 'cenk'
-
 class Solution(object):
     solutions = []
+
+    def permuteUnique(self,nums):
+        self.solutions = []
+        testSeq = [i for i in range(len(nums))]
+        self.permutationsHelper(testSeq,[])
+        resultSet = set()
+
+        for solution in self.solutions:
+            tmp = []
+            for i in solution:
+                tmp.append(nums[i])
+            resultSet.add(tuple(tmp))
+
+        result = []
+        for i in list(resultSet):
+            l = [int(k) for k in i]
+            result.append(l)
+
+        return result
 
     def generateCandidates(self,nums,current):
         s = set(nums)
@@ -9,16 +26,9 @@ class Solution(object):
         candidates = s - currentSet
         return list(candidates)
 
-    def permute(self,nums):
-        self.solutions  = []
-
-        self.permutationsHelper(nums,[])
-        return self.solutions
-
     def permutationsHelper(self,nums,current):
         # is solution
         if len(current) == len(nums):
-            # tmp = "".join([str(i) for i in current])
             tmp = current[:]
             self.solutions.append(tmp)
             return
@@ -31,5 +41,5 @@ class Solution(object):
             current.pop()
 
 s = Solution()
-a=  [1,2,3]
-print s.permute(a)
+a=  [3,3,1,2,3,2,3,1]
+print s.permuteUnique(a)
