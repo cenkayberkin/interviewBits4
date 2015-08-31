@@ -1,3 +1,4 @@
+import heapq
 
 class ListNode(object):
     def __init__(self, x):
@@ -5,12 +6,38 @@ class ListNode(object):
         self.next = None
 
 class Solution(object):
+    heads = []
+    resultHead = None
+    resultTail = None
+    def __init__(self):
+        self.heads = []
+
     def mergeKLists(self, lists):
         """
         :type lists: List[ListNode]
         :rtype: ListNode
         """
-        
+        for i in lists:
+            if i != None:
+                heapq.heappush(self.heads,(i.val,i))
+
+        while len(self.heads) != 0:
+            newNode = heapq.heappop(self.heads)
+
+            if self.resultHead == None:
+                self.resultHead = newNode[1]
+
+                self.resultTail = newNode[1]
+            else:
+                self.resultTail.next = newNode[1]
+                self.resultTail = newNode[1]
+
+            if newNode[1].next != None:
+                t = newNode[1].next
+                heapq.heappush(self.heads,(t.val,t))
+
+        return self.resultHead
+
 
 h11 = ListNode(15)
 h12 = ListNode(22)
