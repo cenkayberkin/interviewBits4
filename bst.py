@@ -1,11 +1,10 @@
-# Definition for a binary tree node.
 class TreeNode(object):
     def __init__(self, x):
         self.val = x
         self.left = None
         self.right = None
 
-class Solution(object):
+class BST(object):
     root = None
 
     def __init__(self):
@@ -28,6 +27,13 @@ class Solution(object):
                 self.insertHelper(node.right,num)
             else:
                 node.right = TreeNode(num)
+
+    def delete(self,num):
+        pass
+
+    def search(self,num):
+        pass
+
     def printTree(self):
         self.printTreeHelper(self.root)
 
@@ -38,31 +44,12 @@ class Solution(object):
         print node.val
         self.printTreeHelper(node.right)
 
-    def sortedArrayToBST(self, nums):
-        self.sortedArrayToBSTHelper(nums)
-        return self.root
-    def sortedArrayToBSTHelper(self, nums):
-        """
-        :type nums: List[int]
-        :rtype: TreeNode
-        """
-        length = len(nums)
-        if length == 0:
-            return
-        mid = length/2
-        self.insert(nums[mid])
-        self.sortedArrayToBSTHelper(nums[:mid])
-        self.sortedArrayToBSTHelper(nums[mid + 1:])
+tree = BST()
+tree.insert(10)
+tree.insert(5)
+tree.insert(8)
+tree.insert(1)
+tree.insert(15)
+tree.insert(12)
 
-
-nums = []
-s = Solution()
-# s.insertNode(10)
-# s.insertNode(5)
-# s.insertNode(8)
-# s.insertNode(1)
-# s.insertNode(15)
-# s.insertNode(12)
-# s.insertNode(20)
-s.sortedArrayToBST(nums)
-s.printTree()
+tree.printTree()
